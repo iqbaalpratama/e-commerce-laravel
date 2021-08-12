@@ -26,8 +26,20 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'roles',
         'password',
     ];
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'users_id', 'id');
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'users_id', 'id');
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -58,4 +70,6 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
 }
